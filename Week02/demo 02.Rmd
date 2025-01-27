@@ -1,0 +1,53 @@
+Log File Approaches
+
+```{r setup, include=FALSE}
+
+```
+
+```{r }
+set.seed(42)
+## create some values
+
+x1 <- rnorm(1e8)
+
+log_file <- 'log1.txt'
+
+cat(paste('Starting logging at ', Sys.time, ':\n'), file=log_file)
+gc()
+
+time1 <- Sys.time()
+mn1 = mean(x1)
+time2 <- Sys.time()
+cat(paste('Approach 1 took ', time2-time1, ':\n'), file=log_file, append=T)
+
+gc()
+
+time3 <- Sys.time()
+mn2 = sum(x1)/length(x1)
+time4 <- Sys.time()
+cat(paste('Approach 2 took ', time4-time3, ':\n'), file=log_file, append=T)
+```
+
+
+```{r }
+
+log_file <- 'log2.txt'
+
+cat(paste('Starting logging at ', Sys.time, ':\n'), file=log_file)
+
+for (i in 1:10) {
+  gc()
+
+  time1 <- Sys.time()
+  mn1 = mean(x1)
+  time2 <- Sys.time()
+  cat(paste('Approach 1 took ', time2-time1, ':\n'), file=log_file, append=T)
+
+  gc()
+
+  time3 <- Sys.time()
+  mn2 = sum(x1)/length(x1)
+  time4 <- Sys.time()
+  cat(paste('Approach 2 took ', time4-time3, ':\n'), file=log_file, append=T)
+}
+```

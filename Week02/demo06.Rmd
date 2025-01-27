@@ -1,0 +1,34 @@
+
+```{r}
+install.packages("doParallel")
+install.packages("foreach")
+install.packages("randomForest")
+```
+
+```{r}
+library(doParallel)
+library(foreach)
+library(MASS)
+library(randomForest)
+```
+
+```{r}
+## Uncomment/Comment out the set of lines that corresponds to your type of machine
+
+## Set For Windows
+cl <- makeCluster(detectCores(), type='PSOCK')
+registerDoParallel((cl))
+## Set for Macs
+#registerDoParallel(cores=detectCores())
+
+
+getDoParWorkers()
+## set options that are specific for the multicore package
+mcoptions <- list(preschedule=FALSE, set.seed=TRUE)
+```
+
+```{r}
+doSeqTreeFitting <- function() {
+  print("Fitting the models sequentially")
+}
+```

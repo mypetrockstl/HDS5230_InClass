@@ -1,0 +1,259 @@
+---
+title: "Week 01 Assignment"
+output: html_notebook
+---
+
+For this assignment, we will be using some simulated electronic health records (these are not real data!). This is a common sort of dataset for health care systems to use when tracking all the patients and the outpatient activity. You should take a few minutes to review the datasets using Excel, read the descriptions, and understand how they fit together. We will only use a few data files in this exercise, but you could explore all of them on your own. 
+Questions
+You will use these datasets to answer the questions listed below. You must be careful to think about what the appropriate denominator is for each question. As you code the answers, be mindful to use the ‘high performance’ coding approaches in data.table.
+1. Are men more likely to die than women in this group of patients? Assume people without a date of death in the mortality table are still alive.
+2. Are there patterns in the disease groups across gender? For every patient with at least one outpatient visit, identify if they have been diagnosed with any of the 22 conditions listed in the diseaseMap table at any time point. You will need to consider all three ICD columns in the outpatientVisit file (not just one). Create a table with the rate of disease for each condition for men, women, and all.
+3. Calculate the mortality rate for every year between 2005 and 2018. Is it generally increasing, or decreasing? Assume patients are only at risk of death as of their first visit (in the outpatient Visit file). Once they have died, they are no longer at risk in subsequent year.
+To submit
+You can either submit the .R or .Rmd files or you can submit the link to the file in your Github repository in the text box.
+
+
+```{r}
+library(data.table)
+library(purrr)
+library(testthat)
+```
+
+```{r}
+## Load the data
+
+##Load Clinic
+clinic.dt <- fread("healthcare-data/Clinic.csv")
+clinic.dt <- data.table(map_df(clinic.dt, as.factor))
+str(clinic.dt)
+```
+
+```{r}
+test_that("Clinic loaded", { expect_equal(clinic.dt[,length(ClinicCode)], 60)})
+test_that("Clinic loaded", { expect_equal(clinic.dt[,.N], 60)})
+```
+
+```{r}
+##Load DiseaseMap
+diseasemap.dt <- fread("healthcare-data/DiseaseMap.csv")
+str(diseasemap.dt)
+```
+
+
+```{r}
+
+summary(diseasemap.dt)
+diseasemap.dt <- data.table(map_df(diseasemap.dt, as.factor))
+
+```
+
+```{r}
+test_that("Disease loaded", { expect_equal(diseasemap.dt[,.N],3419)})
+```
+
+```{r}
+##Load ICDCodes
+icdcodes.dt <- fread("healthcare-data/ICDCodes.csv")
+summary(icdcodes.dt)
+icdcodes.dt <- data.table(map_df(icdcodes.dt, as.factor))
+
+```
+
+```{r}
+test_that("ICD10 loaded", { expect_equal(icdcodes.dt[,.N],3419)})
+```
+
+```{r}
+##Load InsuranceProvider
+insuranceprov.dt <- fread("healthcare-data/InsuranceProvider.csv")
+summary(insuranceprov.dt)
+insuranceprov.dt <- data.table(map_df(insuranceprov.dt, as.factor))
+
+```
+
+```{r}
+test_that("Insurance loaded", { expect_equal(insuranceprov.dt[,.N],15)})
+```
+
+```{r}
+##Load Mortality
+mortality.dt <- fread("healthcare-data/Mortality.csv")
+summary(mortality.dt)
+mortality.dt$PatientID <- as.factor(mortality.dt$PatientID)
+
+```
+
+```{r}
+test_that("Mortality loaded", { expect_equal(mortality.dt[,.N],7094)})
+```
+
+```{r}
+##Load Outpatient Visit
+outpatient.visit.dt <- fread("healthcare-data/OutpatientVisit.csv")
+summary(outpatient.visit.dt)
+outpatient.visit.dt <- data.table(map_df(outpatient.visit.dt[, c(1,2,3,5,6,7,8)],
+                                         as.factor),
+                                  outpatient.visit.dt[, 4])
+```
+
+```{r}
+test_that("Outpatient loaded", { expect_equal(outpatient.visit.dt [,.N],174690)})
+```
+
+```{r}
+## Load Patient
+patient.dt <- fread("healthcare-data/Patient.csv")
+summary(patient.dt)
+patient.dt <- data.table(map_df(patient.dt[, c(1, 4, 5, 7, 8)], as.factor),
+                         patient.dt[, c(2, 3, 6, 9)])
+
+```
+
+```{r}
+test_that("Patient loaded", { expect_equal(patient.dt [,.N],20000 )})
+```
+
+```{r}
+#1
+## Merge patient and Mortality and compare that with patient
+setkey(patient.dt, PatientID)
+setkey(mortality.dt, PatientID)
+
+merged.dt <- patient.dt[mortality.dt, on="PatientID", nomatch=0]
+summary(merged.dt)
+```
+
+```{r}
+dt.1 <- patient.dt[, .N, by=Gender]
+dt.2 <- merged.dt[,.N, by=Gender]
+
+## results show that there is a difference - see the computations below
+female.mort <- dt.2[Gender == "female"]$N/dt.1[Gender == "female"]$N
+male.mort <- dt.2[Gender == "male"]$N/dt.1[Gender == "male"]$N
+```
+
+```{r}
+menMoreLikely = female.mort < male.mort # FALSE because female mort = 35.1%; male mort = 35.9%
+test_that("men more likely to die", { expect_equal(menMoreLikely, TRUE)})
+```
+
+```{r}
+## 2. Combine Outputpatient with Disease on ICD10 code
+outpatient.long <- melt(outpatient.visit.dt[, c(3, 4, 5, 6)],
+                            id.vars = "PatientID",
+                            variable.name = "ICDCode",
+                            value.name = "ICD10")
+summary(outpatient.long)
+#View(outpatient.long)
+outpatient.long$ICDCode <- as.factor(outpatient.long$ICDCode)
+outpatient.long$ICD10 <- as.factor(outpatient.long$ICD10)
+
+pt.ds.dt <- outpatient.long[diseasemap.dt, on="ICD10"]
+summary(pt.ds.dt)
+```
+
+```{r}
+
+pt.ds.dt <- na.omit(pt.ds.dt[, c(1,5)])
+summary(pt.ds.dt)
+
+```
+
+```{r}
+
+pt.ds.dt <- patient.dt[pt.ds.dt, on="PatientID"]
+pt.ds.dt<- pt.ds.dt[Gender %in% c("female", "male")]
+new.dt <- pt.ds.dt[, .N, by = c("Condition", "Gender")]
+names(new.dt) <- c("Condition", "Gender", "Count")
+new.dt
+
+```
+
+```{r}
+
+new.dt.wide <- dcast(new.dt, formula = Condition ~ Gender)
+
+new.dt.wide[,total := female + male]
+summaries.dt <- new.dt.wide[, Condition,
+                            list(female/sum(total)*100,male/sum(total)*100,
+                                 total/sum(total)*100)]
+
+summaries.dt <- data.table(new.dt.wide$Condition,
+                           new.dt.wide[,
+                                       list(female/sum(total)*100,male/sum(total)*100,
+                                            total/sum(total)*100)])
+names(summaries.dt) <- c("Condition", "Women%", "Men%", "All%")
+summaries.dt
+
+```
+
+```{r}
+test_that("summaries populated", { expect_equal(summaries.dt [,l.N],22)})
+```
+
+```{r}
+
+## 3.
+str(mortality.dt)
+
+```
+
+```{r}
+
+get_interval <- function(yr){
+  df <- data.frame(start.date = as.Date(paste0(yr,"-01-01")),
+               end.date <- as.Date(paste0(yr,"-01-31")))
+  names(df) <- c("start.date", "end.date")
+  return(df)
+}
+
+# yr <- 2013
+# get_interval(yr)
+#
+# deaths.dt <- mortality.dt[DateOfDeath >= eval(get_interval(yr)$start.date) &
+#                             DateOfDeath <= eval(get_interval(yr)$end.date)]
+#
+# patient.dt[deaths.dt, on="PatientID"]
+#
+# nrow(patient.dt[deaths.dt, on="PatientID"])/nrow(patient.dt) * 100
+#
+# ## compute the alive records - all those whose death was during or after the current year
+# alive.dt <- mortality.dt[DateOfDeath >= eval(get_interval(yr)$start.date)]
+#
+# nrow(alive.dt[deaths.dt, on="PatientID"])/nrow(alive.dt) * 100
+
+get_mortality_rate <- function(yr){
+  get_interval(yr)
+  deaths.dt <- mortality.dt[DateOfDeath >= eval(get_interval(yr)$start.date) &
+                              DateOfDeath <= eval(get_interval(yr)$end.date)]
+  patient.dt[deaths.dt, on="PatientID"]
+  nrow(patient.dt[deaths.dt, on="PatientID"])/nrow(patient.dt) * 100
+  ## compute the alive records - all those whose death was during or after the current year
+  alive.dt <- mortality.dt[DateOfDeath >= eval(get_interval(yr)$start.date)]
+  return(nrow(alive.dt[deaths.dt, on="PatientID"])/nrow(alive.dt) * 100)
+}
+
+get_mortality_rate(2013)
+
+```
+```{r}
+test_that("2013 is correct", { expect_equal(get_mortality_rate(2013), 1.638896)})
+```
+
+```{r}
+
+map_dbl(seq(2005, 2018),
+       get_mortality_rate)
+
+```
+
+```{r}
+
+yr_seq = seq(2005, 2018)
+out.df <- data.frame(year = yr_seq,
+                     mortality = map_dbl(seq(2005, 2018),
+                                         get_mortality_rate))
+plot(out.df, type="l")
+```
+
+

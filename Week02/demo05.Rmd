@@ -1,0 +1,72 @@
+```{r}
+install.packages('nycflights13')
+install.packages('profvis')
+```
+
+```{r}
+library(nycflights13)
+
+write.csv(flights, file='flights.csv', row.names = FALSE)
+
+##Turn On the Profiler
+Rprof('Read.CSV')
+
+flights1 <- read.csv('flights.csv')
+
+## Turn off the Profiler
+Rprof(NULL)
+
+summaryRprof('Read.CSV')
+```
+
+```{r}
+
+## DOING SOME WORK AHEAD OF TIME
+
+flights_sub <- read.csv('flights.csv',
+                        stringsAsFactors = F,
+                        header = T,
+                        nrows=10,
+                        comment.char="")
+d_types <- sapply(flights_sub, class)
+
+Rprof('Read.CSV2')
+
+flights1 <- read.csv('flights.csv', stringsAsFactors = F, nrows=336776, comment.char="", colClasses=d_types)
+
+Rprof(NULL)
+summaryRprof('Read.CSV2')
+```
+
+```{r}
+##Turn On the Profiler
+Rprof('Fread')
+
+flights1 <- fread('flights.csv')
+
+## Turn off the Profiler
+Rprof(NULL)
+
+summaryRprof('Fread')
+```
+
+```{r}
+##Turn On the Profiler
+Rprof('Data Science Model')
+
+mod1 <- lm(arr_delay ~ carrier+origin, data=flights1)
+## Turn off the Profiler
+Rprof(NULL)
+
+summaryRprof('Data Science Model')
+```
+
+```{r}
+library(profvis)
+
+profvis( {
+  flights1 <- fread('flights.csv')
+  mod1 <- lm(arr_delay ~ carrier+origin, data=flights1)
+  summary(mod1)
+})
+```

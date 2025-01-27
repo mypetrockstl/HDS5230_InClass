@@ -1,0 +1,16 @@
+
+```{r}
+##Turn On the Profiler
+Rprof('profile1')
+
+mean(x1)
+
+sum(x1)/length(x1)
+
+## Turn off the Profiler
+Rprof(NULL)
+
+summaryRprof('profile1')
+```
+
+

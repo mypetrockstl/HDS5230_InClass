@@ -1,0 +1,61 @@
+Initial Demo
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(testthat)
+```
+
+## 
+
+
+``` {r}
+
+set.seed(42)
+## create some values
+
+x1 <- rnorm(1e8)
+
+mn1 = mean(x1)
+
+mn2 = sum(x1)/length(x1)
+
+mn1
+
+```
+
+``` {r}
+test_that("approaches same", {
+  expect_equal(mn1, mn2)
+})
+```
+
+``` {r}
+system.time(mean(x1))
+
+system.time(sum(x1)/length(x1))
+
+```
+
+``` {r}
+gc()
+
+time1 <- Sys.time()
+mean(x1)
+time2 <- Sys.time()
+
+mn1.time = time2-time1
+mn1.time
+```
+
+
+``` {r}
+gc()
+
+time3 <- Sys.time()
+sum(x1)/length(x1)
+time4 <- Sys.time()
+
+mn2.time = time4-time3
+mn2.time
+```

@@ -1,0 +1,44 @@
+
+```{r}
+install.packages("microbenchmark")
+install.packages("ggplot2")
+?microbenchmark
+```
+
+```{r}
+library(microbenchmark)
+```
+
+
+```{r}
+set.seed(42)
+## create some values
+
+x1 <- rnorm(1e8)
+
+bench_result1 <- microbenchmark(
+  'mean_func' = {mean(x1)},
+  'raw_func' = {sum(x1)/length(x1)},
+  times=30,
+  unit="s")
+
+bench_result1
+```
+
+```{r}
+is.data.frame(bench_result1)
+
+library(data.table)
+
+bench_result1_dt <- data.table(bench_result1)
+bench_result1_dt[ , list(mean_time = mean(time)), by='expr']
+
+```
+
+```{r}
+library(ggplot2)
+autoplot(bench_result1)
+```
+
+##What does the graph mean?
+
