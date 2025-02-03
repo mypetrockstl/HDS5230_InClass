@@ -1,0 +1,31 @@
+bizID|bizCat|bizCatSub|bizName|bizAddr|bizCity|bizState|bizZip|bizPhone|bizFax|bizEmail|bizURL|locAreaCode|locFIPS|locTimeZone|locDST|locLat|locLong|locMSA|locPMSA|locCounty
+1|Clinics|Clinics|Hino Ronald H MD|98-151 Pali Momi Street Suite 142|Aiea|HI|96701|(808)487-2477||||808|15003|PST-2|N|21.3980|-157.8981|3320||Honolulu
+2|Clinics|Clinics|Farmer Joesph F Md|1225 Breckenridge Drive|Little Rock|AR|72205|(501)225-2594||||501|05119|CST|Y|34.7495|-92.3533|4400||Pulaski
+3|Clinics|Clinics & Medical Centers|Najjar Fadi Md|1155 West Linda Avenue Suite B|Hermiston|OR|97838|(541)289-1122||||541|41059|PST|Y|45.8456|-119.2817|||Umatilla
+4|Clinics|Clinics & Medical Centers|Kittson Memorial Upper Level Nursing Home|1010 South Birch Avenue|Hallock|MN|56728|(218)843-2525||||218|27069|CST|Y|48.7954|-97.0090|||Kittson
+5|Clinics|Clinics & Medical Centers|Thompson Robert B Md|100 North Eagle Creek Drive|Lexington|KY|40509|(859)258-4000|||www.lexingtonclinic.com|859|21067|EST|Y|37.9935|-84.3712|4280||Fayette
+6|Clinics|Clinics & Medical Centers|Hubert Roy DVM|3000 West 95th Street|Evergreen Park|IL|60805|(708)422-9007||||708|17031|CST|Y|41.7213|-87.7012||1600|Cook
+7|Clinics|Clinics & Medical Centers|Brascho Donn MD|2505 USHighway 431|Boaz|AL|35957|(256)840-3688||||256|01095|CST|Y|34.1534|-86.1537|||Marshall
+8|Clinics|Clinics|Dakota Chiropractic Clinic|320 Dakota Avenue|Wahpeton|ND|58075|(701)642-5600||||701|38077|CST|Y|46.3099|-96.7867|||Richland
+9|Clinics|Clinics & Medical Centers|Culpeper Memorial Hospital Inc - Maternal Child Health|501 Sunset Lane|Culpeper|VA|22701|(540)829-4113||||540|51047|EST|Y|38.4670|-77.9818||8840|Culpeper
+10|Clinics|Clinics & Medical Centers|Delong Donald DVM|2585 Cruse Road|Lawrenceville|GA|30044|(770)277-3220||||770|13135|EST|Y|33.9230|-84.0730|0520||Gwinnett
+11|Clinics|Psychiatric Hospitals|Crestwood Manor|2600 Stockton Boulevard|Sacramento|CA|95817|(916)452-1431||||916|06067|PST|Y|38.5503|-121.4572||6920|Sacramento
+12|Clinics|Clinics & Medical Centers|Mine Creek Healthcare-Nashville|1407 North Main Street|Nashville|AR|71852|(870)845-2021||||870|05061|CST|Y|34.0245|-93.9116|||Howard
+13|Clinics|Clinics & Medical Centers|Pike Medical Clinic Inc|905 Highway 161|Bowling Green|MO|63334|(573)324-2241||||573|29163|CST|Y|39.3210|-91.1912|||Pike
+14|Clinics|Clinics & Medical Centers|Berkshire Health Systems - Hillcrest Campus of BMC|165 Tor Court|Pittsfield|MA|01201|(413)443-4761||||413|25003|EST|Y|42.4608|-73.2820|6320||Berkshire
+15|Clinics|Clinics & Medical Centers|First National Bank Of Maryland 347-6000 - Branch Offices- Downtown- University Of Maryland Hosp|Baltimore Greene South|Baltimore|MD|21204|(410)547-2620||||410|24005|EST|Y|39.4025|-76.6344||0720|Baltimore
+16|Clinics|Clinics & Medical Centers|Chan Yeung|205 North King Street|Seguin|TX|78155|(830)379-0305||||830|48187|CST|Y|29.5278|-97.9363|7240||Guadalupe
+17|Clinics|Clinics & Medical Centers|Ierulli Victor DO|401 West Mohawk Drive|Tomahawk|WI|54487|(715)453-7200||||715|55069|CST|Y|45.5047|-89.7732|||Lincoln
+18|Clinics|Clinics & Medical Centers|Demore H L DVM - RES|Mount Airy Clarkesvi|Mount Airy|GA|30563|(706)778-6035||||706|13137|EST|Y|34.5591|-83.4634|||Habersham
+19|Clinics|Clinics & Medical Centers|Evolution Benefits Incorporated|22 Waterville Road|Avon|CT|06001|(860)678-5560|||www.evolutionbenefits.com|860|09003|EST|Y|41.7904|-72.8686|3280||Hartford
+20|Clinics|Clinics & Medical Centers|Cedars-Sinai Medical Care Foundation - Administration|250 North Robertson Boulevard|Beverly Hills|CA|90211|(310)385-3200|||www.cedars-sinai.edu|310|06037|PST|Y|34.0649|-118.3829||4480|Los Angeles
+21|Clinics|Clinics & Medical Centers|Newton Regional Hospital|208 South Main Street|Newton|MS|39345|(601)683-2031|||www.newtonregionalhospital.com|601|28101|CST|Y|32.3121|-89.2019|||Newton
+22|Clinics|Clinics|Lansing Clinic|50 North Fourth Street|Lansing|IA|52151|(563)538-4874||||563|19005|CST|Y|43.3826|-91.3585|||Allamakee
+23|Clinics|Clinics|Grundman David Md|800 East Locust Street|Olney|IL|62450|(618)395-1944||||618|17159|CST|Y|38.7221|-88.0876|||Richland
+24|Clinics|Clinics|Loveland Dialysis|2940 Ginnala Drive|Loveland|CO|80538|(970)663-9155||||970|08069|MST|Y|40.4433|-105.1046|2670||Larimer
+25|Clinics|Clinics|Apache Junction Urgent Care LLC|2080 West Southern Avenue|Apache Junction|AZ|85220|(480)985-0172|||www.nextcare.com|480|04021|MST|N|33.4198|-111.5733|6200||Pinal
+26|Clinics|Clinics & Medical Centers|Peterson Rehabilitation Hospital & Geriatric Center|Homestead Avenue|Wheeling|WV|26003|(304)234-0552||||304|54069|EST|Y|40.0729|-80.6524|9000||Ohio
+27|Clinics|Clinics & Medical Centers|Ashford Rowell S II PHYS SURG|1526 5th Avenue South|Birmingham|AL|35233|(205)521-6200||||205|01073|CST|Y|33.5089|-86.8014|1000||Jefferson
+28|Clinics|Clinics|Planned Parenthood - Pill Orders|24 Pennacook Street|Manchester|NH|03104|(603)622-0333||||603|33011|EST|Y|43.0089|-71.4405||4760|Hillsborough
+29|Clinics|Clinics & Medical Centers|Fresenius|141 Gateway Drive|Brandon|MS|39042|(601)591-0053||||601|28121|CST|Y|32.2894|-89.9684|3560||Rankin
+30|Clinics|Clinics & Medical Centers|Seidel Saundra L APN BL|82 West Sunbridge Drive|Fayetteville|AR|72703|(479)575-9000||||479|05143|CST|Y|36.1065|-94.2715|2580||Washington
