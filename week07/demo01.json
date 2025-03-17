@@ -1,0 +1,26 @@
+[ 
+        {
+            "name" : "Adam Doyle",
+            "patientId" : "1",
+            "visit" : {
+                "startDate" : "2025-03-04",
+                "endDate" : "2025-03-10"
+            }
+        },
+        {
+            "name" : "Oliver Doyle",
+            "patientId" : "2",
+            "visit" : {
+                "startDate" : "2025-03-05",
+                "endDate" : "2025-03-09"
+            }
+        },
+        {
+            "name" : "Xavier Doyle",
+            "patientId" : "3",
+            "visit" : {
+                "startDate" : "2025-03-06",
+                "endDate" : "2025-03-13"
+            }
+        }    
+]

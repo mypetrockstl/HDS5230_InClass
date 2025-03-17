@@ -1,0 +1,37 @@
+Interval_Code	Interval_Description
+AC	Before meals
+BID	Twice a day
+BIW	Twice a week
+CONT	Continuous
+EMP	As directed
+EOD	Every other day
+HS	At bedtime
+NOCT	At night
+PC	After meals
+PRN	As needed
+Q10H	Every 10 hours
+Q11H	Every 11 hours
+Q12H	Every 12 hours
+Q15H	Every 15 hours
+Q2H	Every 2 hours
+Q30M	Every 30 minutes
+Q3H	Every 3 hours
+Q48H	Every 48 hours
+Q4H	Every 4 hours
+Q5H	Every 5 hours
+Q6H	Every 6 hours
+Q72H	Every 72 hours
+Q7H	Every 7 hours
+Q8H	Every 8 hours
+Q9H	Every 9 hours
+QAM	Every morning
+QD	Once a day
+QH	Every hour
+QID	Four times a day
+QIW	Four times a week
+QPM	Every day afternoon
+QWK	Every week
+TID	Three times a day
+TITRATE	Titrated
+TIW	Three times a week
+X1	One time
